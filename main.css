@@ -2,6 +2,11 @@
 
 body {
     background-color: #E88D67;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
 }
 
 #container {
@@ -11,7 +16,6 @@ body {
     border-radius: 16px;
     margin: 0;
     padding: 10px;
-
 }
 
 #display {
@@ -40,13 +44,17 @@ body {
 
 #topPad {
     display: flex;
-    border: 1px red solid;
+
 }
 
-#topPad buttonAC {
-    background-color: red;
+.button-AC .button-Pad {
+    width: 160px;
+    background-color: #E88D67;
 }
 
+.button-zero .button-Pad {
+    width: 160px;
+}
 #bottomPad {
     display: flex;
 }
@@ -59,6 +67,10 @@ body {
 .column {
     display: flex;
     flex-direction: column;
+}
+
+.column .button-Pad {
+    background-color: #2b9cbe;
 }
 
 .row:last-child {
@@ -75,6 +87,10 @@ body {
     height: 70px;
     width: 75px;
     border-radius: 3px;
+}
+
+.button-Pad:hover{
+    box-shadow: 1px 1px 7px 5px rgb(0 0 0 / 20%);
 }
 
 p {

@@ -156,12 +156,9 @@ button.addEventListener('click', (event) => {
     }
 } )
 
-// 11 numbers max input 
-
-
 
 // variables
-let firstNumber = ''; // need to chage for strings
-let secondNumber = '';// need to chage for strings
+let firstNumber = ''; 
+let secondNumber = '';
 let operator = '';
 let decimalFlag = false;
