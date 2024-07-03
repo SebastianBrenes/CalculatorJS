@@ -42,7 +42,7 @@ function operates(firstNumber, secondNumber, operator) {
             resultValue = divide(firstNumber, secondNumber)
             break;
     }
-    resultValue =   Math.round(resultValue * 100) / 100
+    resultValue = Math.round(resultValue * 100) / 100
     return resultValue;
 }
 
@@ -103,13 +103,25 @@ button.addEventListener('click', (event) => {
                 break;
 
             case '.':
+
                 if (firstNumber != '' && secondNumber != '') {
-                    secondNumber += '.';
+                    if (secondNumber.includes('.') == false) { // checks in case '.' was already pressed before
+                        secondNumber += '.';
+                        decimalFlag = true;
+                        display.textContent += '.';
+                    } else {
+                        alert('You already added a "."')
+                    }
+
                 } else {
-                    firstNumber += '.';
+                    if (firstNumber.includes('.') == false) { // checks in case '.' was already pressed before
+                        firstNumber += '.';
+                        decimalFlag = true;
+                        display.textContent += '.';
+                    } else {
+                        alert('You already added a "."')
+                    }
                 }
-                decimalFlag = true;
-                display.textContent += '.';
                 break;
 
             case '=':
