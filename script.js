@@ -18,6 +18,13 @@ function divide(a, b) {
 
 function operates(firstNumber, secondNumber, operator) {
     let resultValue = 0;
+    if (decimalFlag == true) {
+        firstNumber = parseFloat(firstNumber);
+        secondNumber = parseFloat(secondNumber);
+    } else {
+        firstNumber = parseInt(firstNumber);
+        secondNumber = parseInt(secondNumber);
+    }
     switch (operator) {
         case '+':
             resultValue = add(firstNumber, secondNumber)
@@ -34,75 +41,127 @@ function operates(firstNumber, secondNumber, operator) {
         case '/':
             resultValue = divide(firstNumber, secondNumber)
             break;
-
-        // case '=':
-        //     resultValue
-        //     break;
-            
-        // case '':
-            
-        //     break;
     }
-
+    resultValue =   Math.round(resultValue * 100) / 100
     return resultValue;
 }
 
 
 
 
-// variables
-let firstNumber = 0;
-let secondNumber = 0;
-let operator = "";
 
 let button = document.querySelector('#pad');
 let display = document.querySelector('.display-result');
 button.addEventListener('click', (event) => {
     let target = event.target.textContent; // pad button selected
     if (target.length <= 2) {
-        console.log(target);
-        display.textContent += target;
         switch (target) {
             case 'AC':
-                firstNumber = 0;
-                secondNumber = 0;
-                operator = "";
+                firstNumber = '';
+                secondNumber = '';
+                operator = '';
+                decimalFlag = false;
                 display.textContent = '';
                 break;
 
             case 'C':
-
+                if (firstNumber != 0 && operator != '') {
+                    if (secondNumber == 0) {
+                        operator = '';
+                    } else {
+                    secondNumber = secondNumber.slice(0, -1);
+                    // secondNumber = Math.floor(secondNumber / 10);
+                    }   
+                } else {
+                    firstNumber = firstNumber.slice(0, -1);
+                    // firstNumber = Math.floor(firstNumber / 10)
+                }
+                display.textContent = display.textContent.slice(0, -1);
                 break;
 
             case '+':
                 operator = '+';
+                secondNumber = '';
                 break;
 
             case '-':
                 operator = '-';
+                secondNumber = '';
+                // display.textContent += target;
                 break;
 
             case '*':
                 operator = '*';
+                secondNumber = '';
+                // display.textContent += target;
                 break;
 
             case '/':
                 operator = '/';
+                secondNumber = '';
+                // display.textContent += target;
+                break;
+
+            case '.':
+                if (firstNumber != '' && secondNumber != '') {
+                    secondNumber += '.';
+                } else {
+                    firstNumber += '.';
+                }
+                decimalFlag = true;
+                display.textContent += '.';
                 break;
 
             case '=':
-
+                if (firstNumber === '0' && secondNumber === '0' && operator === '/') {
+                    alert('Fatal Error, you cant divive by 0');
+                    firstNumber = '';
+                    secondNumber = '';
+                    operator = '';
+                    decimalFlag = false;
+                    display.textContent = '';
+                } else if (firstNumber === '' || secondNumber === '' || operator === '' || firstNumber === '.' || secondNumber === '.') {
+                    alert("Fatal Error, you didn't enter a value");
+                    firstNumber = '';
+                    secondNumber = '';
+                    operator = '';
+                    decimalFlag = false;
+                    display.textContent = '';
+                } else {
+                    let operationResult = operates(firstNumber, secondNumber, operator);
+                    display.textContent = operationResult;
+                    console.log(`firstNumber: ${firstNumber}`);
+                    console.log(`secondNumber: ${secondNumber}`);
+                    console.log(`operator: ${operator}`);
+                    firstNumber = operationResult;
+                    secondNumber = '';
+                    operator = ''
+                }
                 break;
             
             default:
-                if (firstNumber != 0 && operator != '') {
-                    secondNumber += parseInt(target);
+                display.textContent += target;
+                if (firstNumber != '' && operator != '') {
+                    secondNumber += target;
+                    display.textContent = secondNumber;
                 } else {
-                    firstNumber += parseInt(target)
+                    firstNumber += target;
                 }
                 break;
         }
+    console.log(`firstNumber: ${firstNumber}`);
+    console.log(`secondNumber: ${secondNumber}`);
+    console.log(`operator: ${operator}`);
+    console.log(`decimals: ${decimalFlag}`);
     }
 } )
 
 // 11 numbers max input 
+
+
+
+// variables
+let firstNumber = ''; // need to chage for strings
+let secondNumber = '';// need to chage for strings
+let operator = '';
+let decimalFlag = false;

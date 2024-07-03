@@ -21,6 +21,7 @@ body {
     display: flex;
     justify-content: end;
     align-items: end;
+    overflow: hidden;
 }
 
 #pad {
@@ -39,6 +40,11 @@ body {
 
 #topPad {
     display: flex;
+    border: 1px red solid;
+}
+
+#topPad buttonAC {
+    background-color: red;
 }
 
 #bottomPad {
@@ -69,7 +75,6 @@ body {
     height: 70px;
     width: 75px;
     border-radius: 3px;
-
 }
 
 p {
